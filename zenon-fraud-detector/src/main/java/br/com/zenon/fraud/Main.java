@@ -34,6 +34,7 @@ public class Main {
                 destino2,
                 true,
                 false
+        );
 
         System.out.println("--- Transação 2 ---");
         System.out.println(transacao2);
