@@ -14,7 +14,7 @@ class TransactionTest {
         Transaction transacao = new Transaction(
                 1, TransactionType.TRANSFER, new BigDecimal("50.0"), origem, destino, false, false
         );
-        
+
         assertNotNull(transacao, "A transação não deveria ser nula");
         assertEquals(TransactionType.TRANSFER, transacao.type(), "O tipo da transação deveria ser TRANSFER");
     }
