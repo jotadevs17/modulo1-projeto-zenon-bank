@@ -7,7 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /*Customer origem = new Customer("C1231006815", new BigDecimal("170136.0"), new BigDecimal("160296.36"));
+        /*
+        Customer origem = new Customer("C1231006815", new BigDecimal("170136.0"), new BigDecimal("160296.36"));
         Customer destino = new Customer("M1979787155", new BigDecimal("0.0"), new BigDecimal("0.0"));
 
         Transaction transacao1 = new Transaction(
@@ -40,21 +41,43 @@ public class Main {
         System.out.println("--- Transação 2 ---");
         System.out.println(transacao2);
 
-        --------------------
-        FIM DOS PRIMEIROS TESTES DA ATIVIDADE 2
 
+
+        -------------------
+                FIM DOS PRIMEIROS TESTES DA ATIVIDADE 2
+*/
 
         TransactionIngestor ingestor = new TransactionIngestor();
 
-        List<Transaction> transacoes = ingestor.loadTransactions("data/PS_20174392719_1491204439457_log.csv");
-        System.out.println("--- Primeiras 10 Transações Ingeridas ---");
-        for (int i = 0; i < 10 && i < transacoes.size(); i++) {
-            System.out.println(transacoes.get(i));
-        }
+        // Apontando de volta para o arquivo original gigante para ter volume de dados
+        String filePath = "data/PS_20174392719_1491204439457_log.csv";
+        List<Transaction> transacoes = ingestor.loadTransactions(filePath);
 
-        --------------------
-         FIM DOS PRIMEIROS TESTES DA ATIVIDADE 3
-         */
+        // Instanciando o analisador de fraudes com a lista carregada
+        FraudAnalyzer analyzer = new FraudAnalyzer(transacoes);
+
+        // 1. Total de Fraudes
+        System.out.println("1. Total de Fraudes: " + analyzer.getTotalFraudes());
+
+        // 2. Top 3 Fraudes de Maior Valor
+        System.out.println("2. Top 3 Fraudes de Maior Valor:");
+        analyzer.getTop3FraudesDeMaiorValor().forEach(valor -> System.out.println(valor.toPlainString()));
+
+        // 3. Clientes Suspeitos
+        System.out.println("3. Clientes Suspeitos:");
+        analyzer.getClientesSuspeitos().forEach(nome -> System.out.println(nome));
+
+        // 4. Prejuízo Total
+        System.out.println("4. Prejuízo Total: " + analyzer.getPrejuizoTotal());
+
+        // 5. Fraudes por Tipo
+        System.out.println("5. Fraudes por Tipo:");
+        analyzer.getFraudesPorTipo().forEach((tipo, quantidade) ->
+                System.out.println(" - " + tipo + ": " + quantidade)
+        );
+
+        /*--------------------
+         FIM DOS PRIMEIROS TESTES DA ATIVIDADE 3, 4 e 5 */
     }
 }
 

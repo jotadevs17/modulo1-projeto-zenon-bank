@@ -22,7 +22,7 @@ public class TransactionIngestor {
                 int count = 0;
 
                 //agora para ler enquanto houver linhas eu vou usar WHile. o contador deve ser menor que 1000 tb
-                while ((line = br.readLine()) != null && count < 1000) {
+                while ((line = br.readLine()) != null && count < 50000) {
 
 
                     try {
