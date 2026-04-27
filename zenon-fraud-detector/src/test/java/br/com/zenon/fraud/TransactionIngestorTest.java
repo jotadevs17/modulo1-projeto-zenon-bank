@@ -36,4 +36,19 @@ class TransactionIngestorTest {
         assertFalse(primeiraTransacao.isFraud());
         assertFalse(primeiraTransacao.isFlaggedFraud());
     }
+
+    @Test
+    void deveIgnorarLinhasCorrompidasEIngerirApenasTransacoesValidas() {
+
+        //vou instanciar o ingestor e passar o caminho do csv sujo da tarefa 04
+        TransactionIngestor ingestor = new TransactionIngestor();
+        String filePath = "data/paysim_with_bad_data.csv";
+
+        //agora eu chamo o metodo pra carregar as transacoes e guardo na lista
+        List<Transaction> transacoes = ingestor.loadTransactions(filePath);
+
+        //hora de validar se o escudo de excecoes deu bom. a lista tem que ter exatamente 8 transacoes validas
+        assertNotNull(transacoes, "A lista de transações não deveria ser nula");
+        assertEquals(8, transacoes.size(), "Deve ler exatamente 8 transações válidas e ignorar as linhas com erro");
+    }
 }

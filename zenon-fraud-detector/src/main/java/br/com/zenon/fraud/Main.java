@@ -39,8 +39,10 @@ public class Main {
 
         System.out.println("--- Transação 2 ---");
         System.out.println(transacao2);
+
+        --------------------
         FIM DOS PRIMEIROS TESTES DA ATIVIDADE 2
-        */
+
 
         TransactionIngestor ingestor = new TransactionIngestor();
 
@@ -49,6 +51,10 @@ public class Main {
         for (int i = 0; i < 10 && i < transacoes.size(); i++) {
             System.out.println(transacoes.get(i));
         }
+
+        --------------------
+         FIM DOS PRIMEIROS TESTES DA ATIVIDADE 3
+         */
     }
 }
 
