@@ -15,15 +15,16 @@ public class TransactionIngestor {
         //irá servir para garantir que o arquivo seja fechado automaticamente no final
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
-            //já vai descartar logo de cara a primeira linha, que s3eria o cabeçalho do CSV
+            //já vai descartar logo de cara a primeira linha, que seria o cabeçalho do CSV
             String line = br.readLine();
 
             if (line != null) {
                 int count = 0;
 
-                //agora para ler enquanto houver linhas eu vou usar WHile. o contador deve ser menor que 1000 tb
-                while ((line = br.readLine()) != null && count < 50000) {
+                //VERIFICAR POSSIBILIDADE DE INVERTER O IF, COLOCANDO ELE ABAIXO DO WHILE
 
+                //agora para ler enquanto houver linhas eu vou usar WHile. o contador deve ser menor que 1000 tb
+                while ((line = br.readLine()) != null && count < 100000) {
 
                     try {
                         //serve para cortar a linha inteira usando a virgula como separador

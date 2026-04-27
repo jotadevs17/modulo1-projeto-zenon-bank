@@ -78,6 +78,37 @@ public class Main {
 
         /*--------------------
          FIM DOS PRIMEIROS TESTES DA ATIVIDADE 3, 4 e 5 */
+
+        /* TESTES COM LIST*/
+
+        TransactionRepository listRepo = new TransactionListRepository(transacoes);
+
+        listRepo.buscarPorNomeOrigem("CSHARP123").ifPresentOrElse(
+                t -> System.out.println(t),
+                () -> System.out.println("Transação não encontrada para o cliente CSHARP123")
+        );
+
+        long inicioLista = System.nanoTime();
+        listRepo.buscarPorNomeOrigem("C1868032458");
+        long fimLista = System.nanoTime();
+
+        System.out.println("Tempo de consulta: " + (fimLista - inicioLista) + " nanos");
+
+
+        /* TESTES COM MAP*/
+
+        TransactionRepository mapRepo = new TransactionMapRepository(transacoes);
+
+        mapRepo.buscarPorNomeOrigem("CSHARP123").ifPresentOrElse(
+                t -> System.out.println(t),
+                () -> System.out.println("Transação não encontrada para o cliente CSHARP123")
+        );
+
+        long inicioMap = System.nanoTime();
+        mapRepo.buscarPorNomeOrigem("C1868032458");
+        long fimMap = System.nanoTime();
+
+        System.out.println("Tempo de consulta: " + (fimMap - inicioMap) + " nanos");
     }
 }
 
