@@ -1,6 +1,11 @@
 package br.com.zenon.fraud;
 
-import java.math.BigDecimal;
+import br.com.zenon.fraud.io.TransactionIngestor;
+import br.com.zenon.fraud.model.Transaction;
+import br.com.zenon.fraud.repository.TransactionMapRepository;
+import br.com.zenon.fraud.repository.TransactionRepository;
+import br.com.zenon.fraud.service.FraudAnalyzer;
+
 import java.util.List;
 
 public class Main {
@@ -79,7 +84,7 @@ public class Main {
         /*--------------------
          FIM DOS PRIMEIROS TESTES DA ATIVIDADE 3, 4 e 5 */
 
-        /* TESTES COM LIST*/
+        /* TESTES COM LIST
 
         TransactionRepository listRepo = new TransactionListRepository(transacoes);
 
@@ -92,7 +97,7 @@ public class Main {
         listRepo.buscarPorNomeOrigem("C1868032458");
         long fimLista = System.nanoTime();
 
-        System.out.println("Tempo de consulta: " + (fimLista - inicioLista) + " nanos");
+        System.out.println("Tempo de consulta: " + (fimLista - inicioLista) + " nanos"); */
 
 
         /* TESTES COM MAP*/

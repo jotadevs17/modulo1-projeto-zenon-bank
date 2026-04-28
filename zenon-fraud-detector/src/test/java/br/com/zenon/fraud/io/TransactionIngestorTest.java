@@ -1,5 +1,7 @@
-package br.com.zenon.fraud;
+package br.com.zenon.fraud.io;
 
+import br.com.zenon.fraud.model.Transaction;
+import br.com.zenon.fraud.model.TransactionType;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.List;

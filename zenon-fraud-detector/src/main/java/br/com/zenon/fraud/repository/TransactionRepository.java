@@ -1,4 +1,6 @@
-package br.com.zenon.fraud;
+package br.com.zenon.fraud.repository;
+
+import br.com.zenon.fraud.model.Transaction;
 
 import java.util.Optional;
 

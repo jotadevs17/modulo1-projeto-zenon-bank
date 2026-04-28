@@ -1,4 +1,4 @@
-package br.com.zenon.fraud;
+package br.com.zenon.fraud.model;
 
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;

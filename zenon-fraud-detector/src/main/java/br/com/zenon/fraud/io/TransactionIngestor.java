@@ -1,4 +1,8 @@
-package br.com.zenon.fraud;
+package br.com.zenon.fraud.io;
+
+import br.com.zenon.fraud.model.Customer;
+import br.com.zenon.fraud.model.Transaction;
+import br.com.zenon.fraud.model.TransactionType;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,7 +28,7 @@ public class TransactionIngestor {
                 //VERIFICAR POSSIBILIDADE DE INVERTER O IF, COLOCANDO ELE ABAIXO DO WHILE
 
                 //agora para ler enquanto houver linhas eu vou usar WHile. o contador deve ser menor que 1000 tb
-                while ((line = br.readLine()) != null && count < 100000) {
+                while ((line = br.readLine()) != null) {
 
                     try {
                         //serve para cortar a linha inteira usando a virgula como separador
