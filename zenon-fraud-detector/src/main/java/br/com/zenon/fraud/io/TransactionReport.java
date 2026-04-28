@@ -5,13 +5,20 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 public class TransactionReport {
 
-    public void processarRelatorio(String filePath) {
+    public void processarRelatorio(String filePath, Locale locale) {
+
+        ResourceBundle bundle = ResourceBundle.getBundle("report", locale);
+
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
 
         // Variaveis que guardam o estado (Atomics são necessários para modificar dentro de um lambda)
         AtomicLong totalLinhas = new AtomicLong(0);
@@ -46,9 +53,12 @@ public class TransactionReport {
             System.err.println("Erro ao processar arquivo: " + e.getMessage());
         }
 
-        // Imprimindo o relatório final
-        System.out.println("Total de linhas: " + totalLinhas.get());
-        System.out.println("Total de fraudes: " + totalFraudes.get());
-        System.out.println("Valor total transacionado: " + valorTotal.get().toPlainString());
+        // Utiliza as chaves do ResourceBundle para os cabeçalhos
+        System.out.println(bundle.getString("report.total.lines") + totalLinhas.get());
+        System.out.println(bundle.getString("report.total.frauds") + totalFraudes.get());
+
+        // Formata o valor total usando o padrão cultural correto (R$ ou $)
+        String valorFormatado = currencyFormatter.format(valorTotal.get());
+        System.out.println(bundle.getString("report.total.value") + valorFormatado);
     }
 }
