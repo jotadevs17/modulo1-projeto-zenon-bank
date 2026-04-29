@@ -6,10 +6,7 @@ import java.util.List;
 
 public interface TransactionRepository {
     Optional<Transaction> buscarPorNomeOrigem(String nameOrig);
-
-    default void save(Transaction transaction) {
-    }
-
-    default void saveAll(List<Transaction> transactions) {
-    }
+    void save(Transaction transaction);
+    void saveAll(List<Transaction> transactions);
+    void deleteAll();
 }

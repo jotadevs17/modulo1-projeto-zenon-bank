@@ -1,7 +1,6 @@
 package br.com.zenon.fraud.repository;
 
 import br.com.zenon.fraud.model.Transaction;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,5 +16,20 @@ public class TransactionListRepository implements TransactionRepository {
         return transactions.stream()
                 .filter(t -> t.origin().name().equals(nameOrig))
                 .findFirst();
+    }
+
+    @Override
+    public void save(Transaction transaction) {
+        this.transactions.add(transaction);
+    }
+
+    @Override
+    public void saveAll(List<Transaction> transactionsList) {
+        this.transactions.addAll(transactionsList);
+    }
+
+    @Override
+    public void deleteAll() {
+        this.transactions.clear();
     }
 }

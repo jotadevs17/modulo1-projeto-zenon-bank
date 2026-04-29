@@ -11,14 +11,13 @@ import java.util.Optional;
 
 public class TransactionSQLRepository implements TransactionRepository {
 
-    private final String url = "jdbc:mysql://localhost:3308/zenon_bank";
+    private final String url = "jdbc:mysql://localhost:3308/zenon_bank?rewriteBatchedStatements=true";
     private final String user = "root";
     private final String password = "root";
 
     @Override
     public Optional<Transaction> buscarPorNomeOrigem(String nameOrig) {
         String sql = "SELECT * FROM TRANSACTIONS WHERE name_orig = ?";
-        // restante do código...
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -63,13 +62,24 @@ public class TransactionSQLRepository implements TransactionRepository {
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            conn.setAutoCommit(false); // Inicia transação manual
+            conn.setAutoCommit(false);
             for (Transaction t : transactions) {
                 setStatementParameters(stmt, t);
                 stmt.addBatch();
             }
             stmt.executeBatch();
             conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteAll() {
+        String sql = "TRUNCATE TABLE TRANSACTIONS";
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
