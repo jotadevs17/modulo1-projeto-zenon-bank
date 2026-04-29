@@ -1,22 +1,28 @@
-# 🏦 Zenón Bank - Projeto Prático: Fundamentos Java
+# Zenon Fraud Detector
 
-Bem-vindo ao repositório base do projeto prático da disciplina de Fundamentos Java. Este projeto simula o backend de uma fintech fictícia, o **Zenón Bank**, onde você aplicará conceitos desde manipulação de tipos básicos até processamento de alta performance e concorrência.
+## Descrição do Projeto
+O Zenon Fraud Detector é uma aplicação backend desenvolvida para o processamento e análise de grandes volumes de transações financeiras baseadas no dataset PaySim. O foco principal do projeto é a eficiência no tratamento de dados (6 milhões de registros) e a detecção de padrões de fraude.
 
-## 📋 Sobre o Projeto
+## Stack Tecnológica
+- **Linguagem:** Java 17 (utilizando Records para imutabilidade)
+- **Gerenciador de Dependências:** Maven
+- **Persistência:** JDBC puro com MySQL 8.0
+- **Infraestrutura:** Docker e Docker Compose
+- **Concorrência:** ExecutorService (Fixed Thread Pool) e Java Streams
 
-O objetivo é consolidar os conhecimentos adquiridos em aula através de um cenário realista. Você lidará com:
-* Modelagem de dados com **Records**.
-* API de Collections e Streams.
-* Manipulação de I/O de arquivos grandes.
-* Tratamento de Exceções.
-* Integração com Banco de Dados.
-* Concorrência e Paralelismo.
+## Arquitetura e Diferenciais Técnicos
+- **Eficiência de Memória:** Implementação de processamento via Streams para evitar `OutOfMemoryError` ao ler arquivos CSV massivos.
+- **Otimização de I/O:** Uso de `addBatch` e `executeBatch` no JDBC, aliado ao parâmetro `rewriteBatchedStatements=true`, reduzindo o tempo de inserção de horas para minutos.
+- **Processamento Paralelo:** Distribuição da carga de trabalho em lotes (chunks) processados concorrentemente, maximizando o uso dos núcleos da CPU.
+- **Resiliência:** Gestão manual de transações (Auto-commit desabilitado) para garantir a integridade dos dados durante inserções em lote.
 
-Siga o passo a passo do quadro de atividades (Trello) do projeto prático dessa disciplina, disponível nos vídeos de projeto prático da disciplina.
+## Como Executar
 
-## 📦 Requisitos
+### Pré-requisitos
+- Docker e Docker Compose instalados.
+- JDK 17 ou superior.
 
-* **Git e GitHub**: para controle de versões e portifólio de repositórios.
-* **Java JDK**: 25 (LTS).
-* **IDE**: IntelliJ IDEA ou Eclipse.
-* **Docker e Docker Compose**: Para a tarefa de Banco de Dados.
+### Passo a Passo
+1. Inicie a infraestrutura de banco de dados:
+   ```bash
+   docker-compose up -d
